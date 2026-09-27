@@ -31,6 +31,11 @@ export const formatDate = (dateString) => {
   }).format(date);
 };
 
+export const formatLakhs = (amountInLakhs) => {
+  if (amountInLakhs === undefined || amountInLakhs === null) return '₹0.0 L';
+  return `₹${amountInLakhs.toFixed(1)} L`;
+};
+
 export const capitalize = (str) => {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
