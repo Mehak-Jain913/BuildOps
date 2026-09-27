@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { ROLES } from '../constants/roles';
+import { useAuth } from './useAuth';
 
 const RoleContext = createContext({
   role: ROLES.ADMIN,
@@ -8,17 +9,35 @@ const RoleContext = createContext({
 });
 
 export const RoleProvider = ({ children }) => {
-  const [role, setRole] = useState(ROLES.ADMIN);
+  const auth = useAuth();
+  const [activeRole, setActiveRole] = useState(auth?.role || ROLES.ADMIN);
 
-  const isRole = (targetRole) => {
-    if (Array.isArray(targetRole)) {
-      return targetRole.includes(role);
+  // Synchronize role with authenticated user's role whenever user/auth updates
+  useEffect(() => {
+    if (auth?.role) {
+      setActiveRole(auth.role);
     }
-    return role === targetRole;
+  }, [auth?.role]);
+
+  const handleSetRole = (newRole) => {
+    setActiveRole(newRole);
+    if (auth?.setRole) {
+      auth.setRole(newRole);
+    }
   };
 
+  const isRole = (targetRole) => {
+    const currentRole = activeRole || auth?.role || ROLES.ADMIN;
+    if (Array.isArray(targetRole)) {
+      return targetRole.includes(currentRole);
+    }
+    return currentRole === targetRole;
+  };
+
+  const currentRole = activeRole || auth?.role || ROLES.ADMIN;
+
   return (
-    <RoleContext.Provider value={{ role, setRole, isRole }}>
+    <RoleContext.Provider value={{ role: currentRole, setRole: handleSetRole, isRole }}>
       {children}
     </RoleContext.Provider>
   );

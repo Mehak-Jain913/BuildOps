@@ -3,8 +3,13 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 import { AuthLayout } from '../layouts/AuthLayout';
 
+// Route Guards
+import { ProtectedRoute } from './ProtectedRoute';
+import { PublicOnlyRoute } from './PublicOnlyRoute';
+
 // Auth
 import { LoginPage } from '../pages/auth/LoginPage';
+import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage';
 
 // Dashboard
 import { DashboardPage } from '../pages/dashboard/DashboardPage';
@@ -55,13 +60,34 @@ import { SettingsPage } from '../pages/settings/SettingsPage';
 export const AppRoutes = () => {
   return (
     <Routes>
-      {/* Auth Route */}
+      {/* Public / Auth Routes */}
       <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={
+            <PublicOnlyRoute>
+              <LoginPage />
+            </PublicOnlyRoute>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <PublicOnlyRoute>
+              <ForgotPasswordPage />
+            </PublicOnlyRoute>
+          }
+        />
       </Route>
 
-      {/* Main Application Layout Routes */}
-      <Route element={<MainLayout />}>
+      {/* Main Application Protected Routes */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<DashboardPage />} />
 

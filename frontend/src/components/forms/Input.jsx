@@ -12,6 +12,7 @@ export const Input = React.forwardRef(({
   helperText,
   leftIcon: LeftIcon,
   rightIcon: RightIcon,
+  rightElement,
   required = false,
   isDisabled = false,
   className = '',
@@ -19,6 +20,8 @@ export const Input = React.forwardRef(({
   ...props
 }, ref) => {
   const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
+  const errorId = error && inputId ? `${inputId}-error` : undefined;
+  const helperId = helperText && inputId ? `${inputId}-helper` : undefined;
 
   return (
     <div className={cn('flex flex-col gap-1.5 w-full', containerClassName)}>
@@ -34,7 +37,7 @@ export const Input = React.forwardRef(({
 
       <div className="relative flex items-center">
         {LeftIcon && (
-          <div className="absolute left-3 text-slate-400 pointer-events-none">
+          <div className="absolute left-3 text-slate-400 pointer-events-none flex items-center justify-center">
             <LeftIcon className="w-4 h-4" />
           </div>
         )}
@@ -44,10 +47,12 @@ export const Input = React.forwardRef(({
           id={inputId}
           type={type}
           disabled={isDisabled}
+          aria-invalid={Boolean(error)}
+          aria-describedby={errorId || helperId}
           className={cn(
             'w-full rounded-lg border bg-white px-3.5 py-2 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:outline-none focus:ring-2 disabled:bg-slate-50 disabled:text-slate-500 disabled:cursor-not-allowed shadow-xs',
             LeftIcon && 'pl-9',
-            RightIcon && 'pr-9',
+            (RightIcon || rightElement) && 'pr-10',
             error
               ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20 text-red-900'
               : 'border-slate-300 focus:border-slate-800 focus:ring-slate-800/10',
@@ -56,17 +61,21 @@ export const Input = React.forwardRef(({
           {...props}
         />
 
-        {RightIcon && (
-          <div className="absolute right-3 text-slate-400">
+        {rightElement ? (
+          <div className="absolute right-2.5 flex items-center text-slate-500">
+            {rightElement}
+          </div>
+        ) : RightIcon ? (
+          <div className="absolute right-3 text-slate-400 pointer-events-none flex items-center justify-center">
             <RightIcon className="w-4 h-4" />
           </div>
-        )}
+        ) : null}
       </div>
 
       {error ? (
-        <span className="text-xs text-red-600 font-medium">{error}</span>
+        <span id={errorId} className="text-xs text-red-600 font-medium">{error}</span>
       ) : helperText ? (
-        <span className="text-xs text-slate-500">{helperText}</span>
+        <span id={helperId} className="text-xs text-slate-500">{helperText}</span>
       ) : null}
     </div>
   );
