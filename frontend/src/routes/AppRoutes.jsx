@@ -24,7 +24,10 @@ import { ProgressPage } from '../pages/projects/ProgressPage';
 
 // Materials
 import { MaterialsPage } from '../pages/materials/MaterialsPage';
+import { InventoryPage } from '../pages/materials/InventoryPage';
 import { RequestsPage } from '../pages/materials/RequestsPage';
+import { MovementsPage } from '../pages/materials/MovementsPage';
+import { MaterialDetailPage } from '../pages/materials/MaterialDetailPage';
 import { PurchaseOrdersPage } from '../pages/materials/PurchaseOrdersPage';
 import { GRNPage } from '../pages/materials/GRNPage';
 import { ConsumptionPage } from '../pages/materials/ConsumptionPage';
@@ -103,11 +106,14 @@ export const AppRoutes = () => {
 
         {/* Materials */}
         <Route path="/materials" element={<MaterialsPage />} />
+        <Route path="/materials/inventory" element={<InventoryPage />} />
         <Route path="/materials/requests" element={<RequestsPage />} />
+        <Route path="/materials/movements" element={<MovementsPage />} />
         <Route path="/materials/purchase-orders" element={<PurchaseOrdersPage />} />
         <Route path="/materials/grn" element={<GRNPage />} />
         <Route path="/materials/consumption" element={<ConsumptionPage />} />
         <Route path="/materials/wastage" element={<WastagePage />} />
+        <Route path="/materials/:materialId" element={<MaterialDetailPage />} />
 
         {/* Labour */}
         <Route path="/labour" element={<LabourPage />} />
