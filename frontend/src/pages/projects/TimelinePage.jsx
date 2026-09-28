@@ -1,14 +1,22 @@
 import React from 'react';
-import { PlaceholderPage } from '../../components/common/PlaceholderPage';
-import { projectTabs } from './ProjectsPage';
+import { MilestoneTimeline } from '../../components/projects/MilestoneTimeline';
+import { useProjects } from '../../hooks/useProjects';
 
 export const TimelinePage = () => {
+  const { milestones } = useProjects();
+
   return (
-    <PlaceholderPage
-      title="Project Timeline & Schedule"
-      subtitle="Interactive Gantt chart schedule, milestone target dates, and critical path analysis."
-      tabs={projectTabs}
-      phase="Phase 1"
-    />
+    <div className="space-y-6">
+      <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xs">
+        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          Project Timelines & Milestones
+        </h1>
+        <p className="text-xs text-slate-500 mt-1">
+          Track master construction schedules, target handover dates, and contractual milestone checkpoints.
+        </p>
+      </div>
+
+      <MilestoneTimeline milestones={milestones} />
+    </div>
   );
 };

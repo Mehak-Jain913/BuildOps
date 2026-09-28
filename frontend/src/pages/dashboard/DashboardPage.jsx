@@ -15,6 +15,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { ROLE_LABELS, ROLES } from '../../constants/roles';
 import { formatLakhs } from '../../utils/formatters';
 import { PROJECT_OPTIONS, MOCK_DASHBOARD_DATA } from '../../mock/dashboardData';
+import { useProjects } from '../../hooks/useProjects';
 import {
   HardHat,
   Building2,
@@ -45,12 +46,36 @@ export const DashboardPage = () => {
   const { role } = useRole();
   const { user } = useAuth();
 
-  const [selectedProjectId, setSelectedProjectId] = useState(PROJECT_OPTIONS[0].id);
+  const { projects, selectedProjectId, setSelectedProjectId } = useProjects();
+
+  const projectOptions = projects.map((p) => ({
+    id: p.id,
+    name: `${p.name} — ${p.location.split(',')[0]}`,
+    code: p.code,
+    location: p.location,
+  }));
 
   const selectedProject =
-    PROJECT_OPTIONS.find((p) => p.id === selectedProjectId) || PROJECT_OPTIONS[0];
+    projectOptions.find((p) => p.id === selectedProjectId) || projectOptions[0] || { location: 'Indore, MP' };
 
-  const data = MOCK_DASHBOARD_DATA;
+  const activeProjectObj = projects.find((p) => p.id === selectedProjectId) || projects[0];
+
+  const data = {
+    ...MOCK_DASHBOARD_DATA,
+    projectSummary: {
+      ...MOCK_DASHBOARD_DATA.projectSummary,
+      name: activeProjectObj?.name || MOCK_DASHBOARD_DATA.projectSummary.name,
+      code: activeProjectObj?.code || MOCK_DASHBOARD_DATA.projectSummary.code,
+      status: activeProjectObj?.status || MOCK_DASHBOARD_DATA.projectSummary.status,
+      healthScore: activeProjectObj?.healthScore || 82,
+      actualProgress: activeProjectObj?.progress || 64,
+      totalBudgetLakhs: activeProjectObj?.budget || 50.0,
+      spentBudgetLakhs: activeProjectObj?.spent || 42.5,
+      utilizationPercent: Math.round(((activeProjectObj?.spent || 42.5) / (activeProjectObj?.budget || 50.0)) * 100),
+      targetDate: activeProjectObj?.targetDate || '13 Nov 2026',
+      daysRemaining: activeProjectObj?.daysRemaining || 47,
+    },
+  };
 
   const handleAction = (message, route) => {
     if (route) {
@@ -110,7 +135,7 @@ export const DashboardPage = () => {
               value={selectedProjectId}
               onChange={(e) => {
                 setSelectedProjectId(e.target.value);
-                const prj = PROJECT_OPTIONS.find((p) => p.id === e.target.value);
+                const prj = projectOptions.find((p) => p.id === e.target.value);
                 addToast({
                   title: 'Project Context Changed',
                   message: `Switched command center view to ${prj?.name}`,
@@ -120,7 +145,7 @@ export const DashboardPage = () => {
               className="w-full bg-slate-50 border border-slate-300 text-slate-900 text-xs font-bold rounded-xl pl-9 pr-8 py-2.5 appearance-none focus:outline-none focus:ring-2 focus:ring-slate-800 cursor-pointer shadow-2xs hover:bg-slate-100 transition-colors"
               aria-label="Select Active Project"
             >
-              {PROJECT_OPTIONS.map((prj) => (
+              {projectOptions.map((prj) => (
                 <option key={prj.id} value={prj.id}>
                   {prj.name}
                 </option>

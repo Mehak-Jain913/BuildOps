@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './hooks/useAuth';
 import { RoleProvider } from './hooks/useRole';
 import { ToastProvider } from './hooks/useToast';
+import { ProjectProvider } from './hooks/useProjects';
 import { AppRoutes } from './routes/AppRoutes';
 
 export default function App() {
@@ -11,10 +12,13 @@ export default function App() {
       <AuthProvider>
         <RoleProvider>
           <ToastProvider>
-            <AppRoutes />
+            <ProjectProvider>
+              <AppRoutes />
+            </ProjectProvider>
           </ToastProvider>
         </RoleProvider>
       </AuthProvider>
     </BrowserRouter>
   );
 }
+

@@ -17,6 +17,7 @@ import { DashboardPage } from '../pages/dashboard/DashboardPage';
 // Projects
 import { ProjectsPage } from '../pages/projects/ProjectsPage';
 import { ProjectDetailPage } from '../pages/projects/ProjectDetailPage';
+import { ProjectEditPage } from '../pages/projects/ProjectEditPage';
 import { TasksPage } from '../pages/projects/TasksPage';
 import { TimelinePage } from '../pages/projects/TimelinePage';
 import { ProgressPage } from '../pages/projects/ProgressPage';
@@ -93,10 +94,12 @@ export const AppRoutes = () => {
 
         {/* Projects */}
         <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/projects/:id" element={<ProjectDetailPage />} />
         <Route path="/projects/tasks" element={<TasksPage />} />
         <Route path="/projects/timeline" element={<TimelinePage />} />
         <Route path="/projects/progress" element={<ProgressPage />} />
+        <Route path="/projects/:projectId/edit" element={<ProjectEditPage />} />
+        <Route path="/projects/:id/edit" element={<ProjectEditPage />} />
+        <Route path="/projects/:id" element={<ProjectDetailPage />} />
 
         {/* Materials */}
         <Route path="/materials" element={<MaterialsPage />} />
