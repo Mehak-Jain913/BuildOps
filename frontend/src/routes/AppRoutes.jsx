@@ -35,7 +35,10 @@ import { WastagePage } from '../pages/materials/WastagePage';
 
 // Labour
 import { LabourPage } from '../pages/labour/LabourPage';
+import { WorkersPage } from '../pages/labour/WorkersPage';
+import { WorkerDetailPage } from '../pages/labour/WorkerDetailPage';
 import { AttendancePage } from '../pages/labour/AttendancePage';
+import { AllocationPage } from '../pages/labour/AllocationPage';
 import { ShiftsPage } from '../pages/labour/ShiftsPage';
 import { WagesPage } from '../pages/labour/WagesPage';
 import { ProductivityPage } from '../pages/labour/ProductivityPage';
@@ -117,10 +120,14 @@ export const AppRoutes = () => {
 
         {/* Labour */}
         <Route path="/labour" element={<LabourPage />} />
+        <Route path="/labour/workers" element={<WorkersPage />} />
+        <Route path="/labour/workers/:workerId" element={<WorkerDetailPage />} />
         <Route path="/labour/attendance" element={<AttendancePage />} />
-        <Route path="/labour/shifts" element={<ShiftsPage />} />
-        <Route path="/labour/wages" element={<WagesPage />} />
+        <Route path="/labour/allocation" element={<AllocationPage />} />
+        <Route path="/labour/shifts" element={<AllocationPage />} />
         <Route path="/labour/productivity" element={<ProductivityPage />} />
+        <Route path="/labour/costs" element={<WagesPage />} />
+        <Route path="/labour/wages" element={<WagesPage />} />
 
         {/* Suppliers */}
         <Route path="/suppliers" element={<SuppliersPage />} />

@@ -1,14 +1,25 @@
-import React from 'react';
-import { PlaceholderPage } from '../../components/common/PlaceholderPage';
-import { labourTabs } from './LabourPage';
+import React, { useState } from 'react';
+import { AttendanceTable } from '../../components/labour/AttendanceTable';
+import { MarkAttendanceModal } from '../../components/labour/MarkAttendanceModal';
+import { useLabour } from '../../hooks/useLabour';
+import { useProjects } from '../../hooks/useProjects';
 
 export const AttendancePage = () => {
+  const { attendance } = useLabour();
+  const { projects } = useProjects();
+  const [isMarkOpen, setIsMarkOpen] = useState(false);
+
   return (
-    <PlaceholderPage
-      title="Daily Labour Attendance & Gate Verification"
-      subtitle="Biometric/RFID gate check-in records, trade turnout percentages, and absent worker logs."
-      tabs={labourTabs}
-      phase="Phase 3"
-    />
+    <div className="space-y-6">
+      <AttendanceTable
+        attendance={attendance}
+        projects={projects}
+        onMarkAttendance={() => setIsMarkOpen(true)}
+        title="Daily Attendance & Working Hours"
+        subtitle="Log worker check-in times, check-out times, working hours, and overtime duty logs."
+      />
+
+      <MarkAttendanceModal isOpen={isMarkOpen} onClose={() => setIsMarkOpen(false)} />
+    </div>
   );
 };

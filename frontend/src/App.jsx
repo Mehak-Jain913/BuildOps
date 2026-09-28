@@ -5,6 +5,7 @@ import { RoleProvider } from './hooks/useRole';
 import { ToastProvider } from './hooks/useToast';
 import { ProjectProvider } from './hooks/useProjects';
 import { MaterialProvider } from './hooks/useMaterials';
+import { LabourProvider } from './hooks/useLabour';
 import { AppRoutes } from './routes/AppRoutes';
 
 export default function App() {
@@ -15,7 +16,9 @@ export default function App() {
           <ToastProvider>
             <ProjectProvider>
               <MaterialProvider>
-                <AppRoutes />
+                <LabourProvider>
+                  <AppRoutes />
+                </LabourProvider>
               </MaterialProvider>
             </ProjectProvider>
           </ToastProvider>

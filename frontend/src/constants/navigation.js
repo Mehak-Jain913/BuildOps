@@ -71,11 +71,12 @@ export const NAVIGATION_ITEMS = [
     icon: Users,
     roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.WORKER],
     children: [
-      { title: 'Workforce Roster', path: '/labour', icon: Users },
+      { title: 'Labour Overview', path: '/labour', icon: Users },
+      { title: 'Worker Directory', path: '/labour/workers', icon: Users },
       { title: 'Daily Attendance', path: '/labour/attendance', icon: UserCheck },
-      { title: 'Shift Management', path: '/labour/shifts', icon: Clock },
-      { title: 'Wage & Payroll', path: '/labour/wages', icon: DollarSign },
-      { title: 'Productivity Metrics', path: '/labour/productivity', icon: TrendingUp },
+      { title: 'Workforce Allocation', path: '/labour/allocation', icon: Clock },
+      { title: 'Productivity & OT', path: '/labour/productivity', icon: TrendingUp },
+      { title: 'Labour Costs', path: '/labour/costs', icon: DollarSign },
     ],
   },
   {
