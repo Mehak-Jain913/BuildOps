@@ -434,6 +434,27 @@ export const DashboardPage = () => {
                 </div>
               ))}
             </div>
+
+            {/* Procurement Signals Banner (Section 33) */}
+            <div className="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200/80 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 font-bold text-amber-900">
+                <Truck className="w-4 h-4 text-amber-600" />
+                <span>Active Procurement Signals:</span>
+              </div>
+              <div className="flex items-center gap-3 font-mono text-[11px]">
+                <button onClick={() => navigate('/procurement/requests')} className="hover:underline font-bold text-slate-800">
+                  Pending PRs: <span className="text-amber-700">4</span>
+                </button>
+                <span className="text-slate-300">•</span>
+                <button onClick={() => navigate('/procurement/deliveries')} className="hover:underline font-bold text-slate-800">
+                  Expected Deliveries: <span className="text-emerald-700">7</span>
+                </button>
+                <span className="text-slate-300">•</span>
+                <button onClick={() => navigate('/procurement/deliveries')} className="hover:underline font-bold text-slate-800">
+                  Delayed Deliveries: <span className="text-rose-700">2</span>
+                </button>
+              </div>
+            </div>
           </Card>
 
           {/* 5. LABOUR STATUS */}

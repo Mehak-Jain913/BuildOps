@@ -215,6 +215,14 @@ export const MOCK_DASHBOARD_DATA = {
         isReady: false,
       },
       {
+        id: 'RD-2B',
+        category: 'Procurement',
+        title: 'Procurement Dispatch Readiness',
+        status: '100% Ready',
+        detail: "Tomorrow's Level 5 slab pour requires 500 cement bags. Expected PO-2026-201 delivery: 500 bags.",
+        isReady: true,
+      },
+      {
         id: 'RD-3',
         category: 'Tasks',
         title: 'Daily Task Schedules',

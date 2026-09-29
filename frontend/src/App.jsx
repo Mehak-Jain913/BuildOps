@@ -6,6 +6,7 @@ import { ToastProvider } from './hooks/useToast';
 import { ProjectProvider } from './hooks/useProjects';
 import { MaterialProvider } from './hooks/useMaterials';
 import { LabourProvider } from './hooks/useLabour';
+import { ProcurementProvider } from './hooks/useProcurement';
 import { AppRoutes } from './routes/AppRoutes';
 
 export default function App() {
@@ -17,7 +18,9 @@ export default function App() {
             <ProjectProvider>
               <MaterialProvider>
                 <LabourProvider>
-                  <AppRoutes />
+                  <ProcurementProvider>
+                    <AppRoutes />
+                  </ProcurementProvider>
                 </LabourProvider>
               </MaterialProvider>
             </ProjectProvider>

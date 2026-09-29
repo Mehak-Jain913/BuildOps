@@ -26,6 +26,8 @@ import {
   Trash2,
   UserCheck,
   Clock,
+  ShoppingBag,
+  History,
   DollarSign,
   Briefcase
 } from 'lucide-react';
@@ -84,6 +86,24 @@ export const NAVIGATION_ITEMS = [
     path: '/suppliers',
     icon: Truck,
     roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.SUPPLIER],
+    children: [
+      { title: 'Supplier Directory', path: '/suppliers', icon: Truck },
+      { title: 'Supplier Performance', path: '/suppliers/performance', icon: TrendingUp },
+    ],
+  },
+  {
+    title: 'Procurement',
+    path: '/procurement',
+    icon: ShoppingBag,
+    roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.SUPPLIER],
+    children: [
+      { title: 'Command Center', path: '/procurement', icon: LayoutDashboard },
+      { title: 'Purchase Requests', path: '/procurement/requests', icon: FileText },
+      { title: 'Purchase Orders', path: '/procurement/orders', icon: ReceiptText },
+      { title: 'Deliveries', path: '/procurement/deliveries', icon: Truck },
+      { title: 'Goods Received (GRN)', path: '/procurement/grn', icon: FileCheck2 },
+      { title: 'Procurement History', path: '/procurement/history', icon: History },
+    ],
   },
   {
     title: 'Site Operations',

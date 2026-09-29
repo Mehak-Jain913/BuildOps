@@ -838,6 +838,7 @@ Supplier & Procurement
         ↓
 Phase 7
 Site Operations
+
         ↓
 Phase 8
 Analytics & Reports

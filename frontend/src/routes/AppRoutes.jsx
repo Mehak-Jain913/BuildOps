@@ -28,8 +28,8 @@ import { InventoryPage } from '../pages/materials/InventoryPage';
 import { RequestsPage } from '../pages/materials/RequestsPage';
 import { MovementsPage } from '../pages/materials/MovementsPage';
 import { MaterialDetailPage } from '../pages/materials/MaterialDetailPage';
-import { PurchaseOrdersPage } from '../pages/materials/PurchaseOrdersPage';
-import { GRNPage } from '../pages/materials/GRNPage';
+import { PurchaseOrdersPage as OldMaterialPOPage } from '../pages/materials/PurchaseOrdersPage';
+import { GRNPage as OldMaterialGRNPage } from '../pages/materials/GRNPage';
 import { ConsumptionPage } from '../pages/materials/ConsumptionPage';
 import { WastagePage } from '../pages/materials/WastagePage';
 
@@ -43,8 +43,15 @@ import { ShiftsPage } from '../pages/labour/ShiftsPage';
 import { WagesPage } from '../pages/labour/WagesPage';
 import { ProductivityPage } from '../pages/labour/ProductivityPage';
 
-// Suppliers
+// Suppliers & Procurement
 import { SuppliersPage } from '../pages/suppliers/SuppliersPage';
+import { SupplierDetailPage } from '../pages/suppliers/SupplierDetailPage';
+import { ProcurementPage } from '../pages/procurement/ProcurementPage';
+import { PurchaseRequestsPage } from '../pages/procurement/PurchaseRequestsPage';
+import { PurchaseOrdersPage } from '../pages/procurement/PurchaseOrdersPage';
+import { DeliveriesPage } from '../pages/procurement/DeliveriesPage';
+import { GRNPage } from '../pages/procurement/GRNPage';
+import { ProcurementHistoryPage } from '../pages/procurement/ProcurementHistoryPage';
 
 // Site Operations
 import { DailyReportsPage } from '../pages/site/DailyReportsPage';
@@ -131,6 +138,16 @@ export const AppRoutes = () => {
 
         {/* Suppliers */}
         <Route path="/suppliers" element={<SuppliersPage />} />
+        <Route path="/suppliers/performance" element={<SuppliersPage />} />
+        <Route path="/suppliers/:supplierId" element={<SupplierDetailPage />} />
+
+        {/* Procurement */}
+        <Route path="/procurement" element={<ProcurementPage />} />
+        <Route path="/procurement/requests" element={<PurchaseRequestsPage />} />
+        <Route path="/procurement/orders" element={<PurchaseOrdersPage />} />
+        <Route path="/procurement/deliveries" element={<DeliveriesPage />} />
+        <Route path="/procurement/grn" element={<GRNPage />} />
+        <Route path="/procurement/history" element={<ProcurementHistoryPage />} />
 
         {/* Site Operations */}
         <Route path="/site/daily-reports" element={<DailyReportsPage />} />
