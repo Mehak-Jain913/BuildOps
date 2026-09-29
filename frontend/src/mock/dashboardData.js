@@ -246,6 +246,22 @@ export const MOCK_DASHBOARD_DATA = {
         detail: 'Clear skies, no precipitation forecast for 24h',
         isReady: true,
       },
+      {
+        id: 'RD-6',
+        category: 'Issues',
+        title: 'Site Issue Clearance',
+        status: 'Attention',
+        detail: '4 open site issues; steel rebar delay requires expediting.',
+        isReady: false,
+      },
+      {
+        id: 'RD-7',
+        category: 'Safety',
+        title: 'Safety & PPE Compliance',
+        status: '94% Compliant',
+        detail: 'Toolbox talk completed; perimeter netting verified on Level 4.',
+        isReady: true,
+      },
     ],
   },
 

@@ -54,10 +54,13 @@ import { GRNPage } from '../pages/procurement/GRNPage';
 import { ProcurementHistoryPage } from '../pages/procurement/ProcurementHistoryPage';
 
 // Site Operations
-import { DailyReportsPage } from '../pages/site/DailyReportsPage';
-import { IssuesPage } from '../pages/site/IssuesPage';
-import { PhotosPage } from '../pages/site/PhotosPage';
-import { InspectionsPage } from '../pages/site/InspectionsPage';
+import { SiteOperationsPage } from '../pages/site/SiteOperationsPage';
+import { DailyReportPage } from '../pages/site/DailyReportPage';
+import { WorkProgressPage } from '../pages/site/WorkProgressPage';
+import { SiteIssuesPage } from '../pages/site/SiteIssuesPage';
+import { SafetyPage } from '../pages/site/SafetyPage';
+import { SiteActivityPage } from '../pages/site/SiteActivityPage';
+import { SiteEvidencePage } from '../pages/site/SiteEvidencePage';
 
 // Intelligence
 import { IntelligenceOverviewPage } from '../pages/intelligence/IntelligenceOverviewPage';
@@ -150,10 +153,16 @@ export const AppRoutes = () => {
         <Route path="/procurement/history" element={<ProcurementHistoryPage />} />
 
         {/* Site Operations */}
-        <Route path="/site/daily-reports" element={<DailyReportsPage />} />
-        <Route path="/site/issues" element={<IssuesPage />} />
-        <Route path="/site/photos" element={<PhotosPage />} />
-        <Route path="/site/inspections" element={<InspectionsPage />} />
+        <Route path="/site" element={<SiteOperationsPage />} />
+        <Route path="/site/daily-report" element={<DailyReportPage />} />
+        <Route path="/site/daily-reports" element={<DailyReportPage />} />
+        <Route path="/site/work-progress" element={<WorkProgressPage />} />
+        <Route path="/site/issues" element={<SiteIssuesPage />} />
+        <Route path="/site/safety" element={<SafetyPage />} />
+        <Route path="/site/inspections" element={<SafetyPage />} />
+        <Route path="/site/activity" element={<SiteActivityPage />} />
+        <Route path="/site/evidence" element={<SiteEvidencePage />} />
+        <Route path="/site/photos" element={<SiteEvidencePage />} />
 
         {/* Intelligence */}
         <Route path="/intelligence" element={<IntelligenceOverviewPage />} />

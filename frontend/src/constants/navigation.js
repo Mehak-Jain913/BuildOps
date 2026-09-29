@@ -107,14 +107,17 @@ export const NAVIGATION_ITEMS = [
   },
   {
     title: 'Site Operations',
-    path: '/site/daily-reports',
+    path: '/site',
     icon: HardHat,
-    roles: [ROLES.ADMIN, ROLES.SUPERVISOR],
+    roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.WORKER],
     children: [
-      { title: 'Daily Site Logs', path: '/site/daily-reports', icon: FileText },
-      { title: 'Issues & Hazards', path: '/site/issues', icon: AlertTriangle },
-      { title: 'Progress Photos', path: '/site/photos', icon: Camera },
-      { title: 'Safety Inspections', path: '/site/inspections', icon: ShieldCheck },
+      { title: 'Command Center', path: '/site', icon: LayoutDashboard },
+      { title: 'Daily Report', path: '/site/daily-report', icon: FileText },
+      { title: 'Work Progress', path: '/site/work-progress', icon: TrendingUp },
+      { title: 'Site Issues', path: '/site/issues', icon: AlertTriangle },
+      { title: 'Safety Management', path: '/site/safety', icon: ShieldCheck },
+      { title: 'Site Activity', path: '/site/activity', icon: Clock },
+      { title: 'Site Evidence', path: '/site/evidence', icon: Camera },
     ],
   },
   {
