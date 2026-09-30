@@ -68,9 +68,17 @@ import { PredictionsPage } from '../pages/intelligence/PredictionsPage';
 import { RiskRadarPage } from '../pages/intelligence/RiskRadarPage';
 import { RecommendationsPage } from '../pages/intelligence/RecommendationsPage';
 import { AIAssistantPage } from '../pages/intelligence/AIAssistantPage';
+import { ReadinessPage } from '../pages/intelligence/ReadinessPage';
+import { InsightsPage } from '../pages/intelligence/InsightsPage';
 
-// Analytics, Notifications, Settings
+// Analytics
 import { AnalyticsPage } from '../pages/analytics/AnalyticsPage';
+import { ProjectAnalyticsPage } from '../pages/analytics/ProjectAnalyticsPage';
+import { MaterialAnalyticsPage } from '../pages/analytics/MaterialAnalyticsPage';
+import { LabourAnalyticsPage } from '../pages/analytics/LabourAnalyticsPage';
+import { ProcurementAnalyticsPage } from '../pages/analytics/ProcurementAnalyticsPage';
+import { SiteAnalyticsPage } from '../pages/analytics/SiteAnalyticsPage';
+import { CostAnalyticsPage } from '../pages/analytics/CostAnalyticsPage';
 import { NotificationsPage } from '../pages/notifications/NotificationsPage';
 import { SettingsPage } from '../pages/settings/SettingsPage';
 
@@ -166,13 +174,26 @@ export const AppRoutes = () => {
 
         {/* Intelligence */}
         <Route path="/intelligence" element={<IntelligenceOverviewPage />} />
-        <Route path="/intelligence/predictions" element={<PredictionsPage />} />
+        <Route path="/intelligence/overview" element={<IntelligenceOverviewPage />} />
+        <Route path="/intelligence/risk-radar" element={<RiskRadarPage />} />
         <Route path="/intelligence/risk" element={<RiskRadarPage />} />
+        <Route path="/intelligence/readiness" element={<ReadinessPage />} />
+        <Route path="/intelligence/insights" element={<InsightsPage />} />
+        <Route path="/intelligence/predictions" element={<PredictionsPage />} />
         <Route path="/intelligence/recommendations" element={<RecommendationsPage />} />
         <Route path="/intelligence/assistant" element={<AIAssistantPage />} />
 
-        {/* Analytics, Notifications, Settings */}
+        {/* Analytics */}
         <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/analytics/overview" element={<AnalyticsPage />} />
+        <Route path="/analytics/projects" element={<ProjectAnalyticsPage />} />
+        <Route path="/analytics/materials" element={<MaterialAnalyticsPage />} />
+        <Route path="/analytics/labour" element={<LabourAnalyticsPage />} />
+        <Route path="/analytics/procurement" element={<ProcurementAnalyticsPage />} />
+        <Route path="/analytics/site" element={<SiteAnalyticsPage />} />
+        <Route path="/analytics/costs" element={<CostAnalyticsPage />} />
+
+        {/* Notifications & Settings */}
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
 

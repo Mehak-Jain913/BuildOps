@@ -8,6 +8,7 @@ import { MaterialProvider } from './hooks/useMaterials';
 import { LabourProvider } from './hooks/useLabour';
 import { ProcurementProvider } from './hooks/useProcurement';
 import { SiteOperationsProvider } from './hooks/useSiteOperations';
+import { AnalyticsProvider } from './hooks/useAnalytics';
 import { AppRoutes } from './routes/AppRoutes';
 
 export default function App() {
@@ -21,7 +22,9 @@ export default function App() {
                 <LabourProvider>
                   <ProcurementProvider>
                     <SiteOperationsProvider>
-                      <AppRoutes />
+                      <AnalyticsProvider>
+                        <AppRoutes />
+                      </AnalyticsProvider>
                     </SiteOperationsProvider>
                   </ProcurementProvider>
                 </LabourProvider>

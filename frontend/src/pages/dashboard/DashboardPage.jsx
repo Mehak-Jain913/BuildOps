@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { PageHeader } from '../../components/common/PageHeader';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -12,6 +12,7 @@ import { BarChartContainer } from '../../components/charts/BarChartContainer';
 import { useToast } from '../../hooks/useToast';
 import { useRole } from '../../hooks/useRole';
 import { useAuth } from '../../hooks/useAuth';
+import { useAnalytics } from '../../hooks/useAnalytics';
 import { ROLE_LABELS, ROLES } from '../../constants/roles';
 import { formatLakhs } from '../../utils/formatters';
 import { PROJECT_OPTIONS, MOCK_DASHBOARD_DATA } from '../../mock/dashboardData';
@@ -47,6 +48,14 @@ export const DashboardPage = () => {
   const { user } = useAuth();
 
   const { projects, selectedProjectId, setSelectedProjectId } = useProjects();
+  const {
+    projectAnalytics,
+    materialAnalytics,
+    labourAnalytics,
+    readinessIntelligence,
+    riskRadar,
+    intelligenceInsights,
+  } = useAnalytics();
 
   const projectOptions = projects.map((p) => ({
     id: p.id,
@@ -722,31 +731,94 @@ export const DashboardPage = () => {
             </div>
           </Card>
 
-          {/* 10. INTELLIGENCE INSIGHT */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-600" />
-                <span>BuildOps Intelligence</span>
-              </h3>
-              <Badge variant="amber" size="sm">
-                Intelligence Preview
-              </Badge>
-            </div>
+          {/* 10. BUILDOPS INTELLIGENCE SECTION */}
+          <Card
+            header={
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-amber-500" />
+                  <span className="text-base font-bold text-slate-900">BuildOps Intelligence</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs font-semibold">
+                  <Link to="/analytics" className="text-amber-600 hover:text-amber-700 hover:underline">
+                    View Analytics →
+                  </Link>
+                  <span className="text-slate-300">•</span>
+                  <Link to="/intelligence" className="text-amber-600 hover:text-amber-700 hover:underline">
+                    View Intelligence →
+                  </Link>
+                </div>
+              </div>
+            }
+            subtitle="Live operational derived signals and rule-based site prescriptions."
+            className="border-amber-200/80 bg-slate-900 text-white"
+          >
+            <div className="space-y-4">
+              {/* Derived Operational Metrics Grid */}
+              <div className="grid grid-cols-2 gap-2 text-xs">
+                <div className="p-2.5 bg-slate-800/90 rounded-lg border border-slate-700">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase block">Schedule Variance</span>
+                  <span className={`font-mono font-bold text-sm ${projectAnalytics.scheduleVariancePct >= 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                    {projectAnalytics.scheduleVariancePct > 0 ? '+' : ''}{projectAnalytics.scheduleVariancePct}%
+                  </span>
+                </div>
 
-            {data.intelligenceInsights.map((ins) => (
-              <InsightCard
-                key={ins.id}
-                type={ins.badgeLabel}
-                title={ins.title}
-                description={ins.description}
-                confidence={ins.confidence}
-                recommendation={ins.recommendation}
-                impact={ins.impact}
-                onApply={() => handleAction(`Applied recommendation for: ${ins.title}`)}
-              />
-            ))}
-          </div>
+                <div className="p-2.5 bg-slate-800/90 rounded-lg border border-slate-700">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase block">Material Variance</span>
+                  <span className={`font-mono font-bold text-sm ${materialAnalytics.materialConsumptionVariancePct > 5 ? 'text-amber-400' : 'text-emerald-400'}`}>
+                    {materialAnalytics.materialConsumptionVariancePct > 0 ? '+' : ''}{materialAnalytics.materialConsumptionVariancePct}%
+                  </span>
+                </div>
+
+                <div className="p-2.5 bg-slate-800/90 rounded-lg border border-slate-700">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase block">Labour Output</span>
+                  <span className="font-mono font-bold text-sm text-blue-400">
+                    {labourAnalytics.avgProductivityPct}%
+                  </span>
+                </div>
+
+                <div className="p-2.5 bg-slate-800/90 rounded-lg border border-slate-700">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase block">Tomorrow Readiness</span>
+                  <span className="font-mono font-bold text-sm text-amber-400">
+                    {readinessIntelligence.overallScore}%
+                  </span>
+                </div>
+              </div>
+
+              {/* Top Risk Signal */}
+              {riskRadar.categories && riskRadar.categories.length > 0 && (
+                <div className="p-3 rounded-lg bg-slate-800 border border-slate-700 text-xs">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] uppercase font-bold text-slate-400">Top Operational Risk Signal</span>
+                    <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded uppercase ${
+                      riskRadar.categories[0].status === 'CRITICAL' ? 'bg-red-500 text-white' : 'bg-amber-500 text-slate-950'
+                    }`}>
+                      {riskRadar.categories[0].status}
+                    </span>
+                  </div>
+                  <div className="font-bold text-white mb-0.5">{riskRadar.categories[0].name}</div>
+                  <div className="text-[11px] text-slate-300 font-mono">{riskRadar.categories[0].evidence}</div>
+                </div>
+              )}
+
+              {/* Actionable Insights */}
+              <div className="space-y-2">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block">Prescriptive Action Items</span>
+                {intelligenceInsights.slice(0, 2).map((ins) => (
+                  <div key={ins.id} className="p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/80 text-xs flex flex-col gap-1">
+                    <div className="flex items-center justify-between font-bold text-amber-300">
+                      <span>{ins.title}</span>
+                      <span className="text-[10px] text-slate-400">{ins.category}</span>
+                    </div>
+                    <p className="text-[11px] text-slate-300 leading-snug">{ins.recommendedAttention}</p>
+                    <Link to={ins.drilldown || '/intelligence'} className="text-[11px] text-amber-400 font-bold hover:underline self-end">
+                      Investigate →
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Card>
 
           {/* 11. RECENT SITE ISSUES */}
           <Card
