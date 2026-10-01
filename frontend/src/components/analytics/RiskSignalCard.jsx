@@ -1,9 +1,10 @@
 import React from 'react';
-import { ShieldAlert, AlertCircle, AlertTriangle, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShieldAlert, AlertCircle, AlertTriangle, CheckCircle2, ShieldCheck, Brain, ArrowUpRight } from 'lucide-react';
 import { AnalyticsDrilldownLink } from './AnalyticsDrilldownLink';
 
 export const RiskSignalCard = ({ category }) => {
-  const { name, status, score, evidence, recommendation, drilldown } = category || {};
+  const { name, status, score, evidence, recommendation, drilldown, predictionUrl } = category || {};
 
   const getStatusColor = () => {
     switch (status) {
@@ -33,6 +34,18 @@ export const RiskSignalCard = ({ category }) => {
     }
   };
 
+  const getPredictionUrl = () => {
+    if (predictionUrl) return predictionUrl;
+    const lower = (name || '').toLowerCase();
+    if (lower.includes('schedule')) return '/predictions/schedule-delay';
+    if (lower.includes('material')) return '/predictions/material-shortage';
+    if (lower.includes('labour')) return '/predictions/labour-requirement';
+    if (lower.includes('procurement')) return '/predictions/procurement-delay';
+    if (lower.includes('cost')) return '/predictions/cost-forecast';
+    if (lower.includes('readiness') || lower.includes('safety') || lower.includes('site')) return '/predictions/readiness';
+    return '/predictions';
+  };
+
   return (
     <div className={`rounded-xl border p-4 shadow-xs transition-all flex flex-col justify-between ${getCardBorder()}`}>
       <div>
@@ -58,8 +71,16 @@ export const RiskSignalCard = ({ category }) => {
         </div>
       </div>
 
-      <div className="mt-4 pt-2.5 border-t border-slate-200/80 flex items-center justify-end">
-        <AnalyticsDrilldownLink to={drilldown || '/analytics'} label="Investigate Risk Source" />
+      <div className="mt-4 pt-2.5 border-t border-slate-200/80 flex items-center justify-between gap-2 text-xs font-semibold">
+        <Link
+          to={getPredictionUrl()}
+          className="inline-flex items-center gap-1 text-amber-600 hover:text-amber-700 hover:underline text-xs font-bold"
+        >
+          <Brain className="w-3.5 h-3.5 text-amber-500" />
+          <span>View Prediction ➔</span>
+        </Link>
+
+        <AnalyticsDrilldownLink to={drilldown || '/analytics'} label="Investigate Source" />
       </div>
     </div>
   );

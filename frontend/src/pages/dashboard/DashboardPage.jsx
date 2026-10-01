@@ -13,6 +13,7 @@ import { useToast } from '../../hooks/useToast';
 import { useRole } from '../../hooks/useRole';
 import { useAuth } from '../../hooks/useAuth';
 import { useAnalytics } from '../../hooks/useAnalytics';
+import { usePredictions } from '../../hooks/usePredictions';
 import { ROLE_LABELS, ROLES } from '../../constants/roles';
 import { formatLakhs } from '../../utils/formatters';
 import { PROJECT_OPTIONS, MOCK_DASHBOARD_DATA } from '../../mock/dashboardData';
@@ -38,7 +39,8 @@ import {
   Wrench,
   Sun,
   Truck,
-  CheckSquare
+  CheckSquare,
+  Brain
 } from 'lucide-react';
 
 export const DashboardPage = () => {
@@ -56,6 +58,7 @@ export const DashboardPage = () => {
     riskRadar,
     intelligenceInsights,
   } = useAnalytics();
+  const { predictions } = usePredictions();
 
   const projectOptions = projects.map((p) => ({
     id: p.id,
@@ -731,6 +734,47 @@ export const DashboardPage = () => {
             </div>
           </Card>
 
+          {/* 9.5 PREDICTIVE ALERTS (Phase 9) */}
+          <Card
+            header={
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <Brain className="w-5 h-5 text-amber-500" />
+                  <span className="text-base font-bold text-slate-900">Predictive Alerts</span>
+                </div>
+                <Link to="/predictions" className="text-xs font-bold text-amber-600 hover:text-amber-700 hover:underline">
+                  View Predictions →
+                </Link>
+              </div>
+            }
+            subtitle="Forward-looking operational risk signals derived from BuildOps data."
+            className="border-amber-200/80 bg-white"
+          >
+            <div className="space-y-2.5 text-xs">
+              {predictions.slice(0, 4).map((pred) => (
+                <div
+                  key={pred.predictionId}
+                  className="p-3 rounded-xl border border-slate-200/80 bg-slate-50/60 flex items-center justify-between gap-3 shadow-2xs hover:border-slate-300 transition-all"
+                >
+                  <div className="space-y-0.5 min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-extrabold text-slate-900 text-xs truncate">{pred.category}:</span>
+                      <span className="text-amber-700 font-bold font-mono text-[11px] truncate">{pred.value}</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 truncate">{pred.evidence}</p>
+                  </div>
+                  <Link
+                    to={pred.drilldownUrl || '/predictions'}
+                    className="text-amber-600 hover:text-amber-700 font-bold shrink-0 text-[11px] hover:underline flex items-center gap-0.5"
+                  >
+                    <span>Investigate</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </Card>
+
           {/* 10. BUILDOPS INTELLIGENCE SECTION */}
           <Card
             header={
@@ -744,8 +788,8 @@ export const DashboardPage = () => {
                     View Analytics →
                   </Link>
                   <span className="text-slate-300">•</span>
-                  <Link to="/intelligence" className="text-amber-600 hover:text-amber-700 hover:underline">
-                    View Intelligence →
+                  <Link to="/predictions" className="text-amber-600 hover:text-amber-700 hover:underline">
+                    Predictions →
                   </Link>
                 </div>
               </div>

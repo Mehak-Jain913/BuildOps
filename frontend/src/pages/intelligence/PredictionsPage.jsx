@@ -1,14 +1,6 @@
 import React from 'react';
-import { PlaceholderPage } from '../../components/common/PlaceholderPage';
-import { intelligenceTabs } from './IntelligenceOverviewPage';
+import { PredictionsPage as CommandCenter } from '../predictions/PredictionsPage';
 
 export const PredictionsPage = () => {
-  return (
-    <PlaceholderPage
-      title="Predictive Material Depletion Engine"
-      subtitle="Machine learning forecasting models for cement, rebar, and aggregate stockout prevention."
-      tabs={intelligenceTabs}
-      phase="Phase 4"
-    />
-  );
+  return <CommandCenter />;
 };

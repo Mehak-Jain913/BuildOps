@@ -64,12 +64,24 @@ import { SiteEvidencePage } from '../pages/site/SiteEvidencePage';
 
 // Intelligence
 import { IntelligenceOverviewPage } from '../pages/intelligence/IntelligenceOverviewPage';
-import { PredictionsPage } from '../pages/intelligence/PredictionsPage';
+import { PredictionsPage as OldPredictionsPage } from '../pages/intelligence/PredictionsPage';
 import { RiskRadarPage } from '../pages/intelligence/RiskRadarPage';
 import { RecommendationsPage } from '../pages/intelligence/RecommendationsPage';
 import { AIAssistantPage } from '../pages/intelligence/AIAssistantPage';
 import { ReadinessPage } from '../pages/intelligence/ReadinessPage';
 import { InsightsPage } from '../pages/intelligence/InsightsPage';
+
+// Predictive Intelligence Phase 9
+import { PredictionsPage as PredictionsCommandCenter } from '../pages/predictions/PredictionsPage';
+import { MaterialDemandPage } from '../pages/predictions/MaterialDemandPage';
+import { MaterialShortagePage } from '../pages/predictions/MaterialShortagePage';
+import { LabourRequirementPage } from '../pages/predictions/LabourRequirementPage';
+import { ScheduleDelayPage } from '../pages/predictions/ScheduleDelayPage';
+import { ProcurementDelayPage } from '../pages/predictions/ProcurementDelayPage';
+import { CostForecastPage } from '../pages/predictions/CostForecastPage';
+import { ReadinessForecastPage } from '../pages/predictions/ReadinessForecastPage';
+import { PredictionHistoryPage } from '../pages/predictions/PredictionHistoryPage';
+import { ModelReadinessPage } from '../pages/predictions/ModelReadinessPage';
 
 // Analytics
 import { AnalyticsPage } from '../pages/analytics/AnalyticsPage';
@@ -179,9 +191,22 @@ export const AppRoutes = () => {
         <Route path="/intelligence/risk" element={<RiskRadarPage />} />
         <Route path="/intelligence/readiness" element={<ReadinessPage />} />
         <Route path="/intelligence/insights" element={<InsightsPage />} />
-        <Route path="/intelligence/predictions" element={<PredictionsPage />} />
+        <Route path="/intelligence/predictions" element={<PredictionsCommandCenter />} />
         <Route path="/intelligence/recommendations" element={<RecommendationsPage />} />
         <Route path="/intelligence/assistant" element={<AIAssistantPage />} />
+
+        {/* Predictive Intelligence Phase 9 Routes */}
+        <Route path="/predictions" element={<PredictionsCommandCenter />} />
+        <Route path="/predictions/overview" element={<PredictionsCommandCenter />} />
+        <Route path="/predictions/material-demand" element={<MaterialDemandPage />} />
+        <Route path="/predictions/material-shortage" element={<MaterialShortagePage />} />
+        <Route path="/predictions/labour-requirement" element={<LabourRequirementPage />} />
+        <Route path="/predictions/schedule-delay" element={<ScheduleDelayPage />} />
+        <Route path="/predictions/procurement-delay" element={<ProcurementDelayPage />} />
+        <Route path="/predictions/cost-forecast" element={<CostForecastPage />} />
+        <Route path="/predictions/readiness" element={<ReadinessForecastPage />} />
+        <Route path="/predictions/history" element={<PredictionHistoryPage />} />
+        <Route path="/predictions/model-readiness" element={<ModelReadinessPage />} />
 
         {/* Analytics */}
         <Route path="/analytics" element={<AnalyticsPage />} />

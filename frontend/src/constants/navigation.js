@@ -29,7 +29,9 @@ import {
   ShoppingBag,
   History,
   DollarSign,
-  Briefcase
+  Briefcase,
+  Layers,
+  Calculator
 } from 'lucide-react';
 import { ROLES } from './roles';
 
@@ -131,6 +133,25 @@ export const NAVIGATION_ITEMS = [
       { title: 'Risk Radar', path: '/intelligence/risk-radar', icon: ShieldAlert },
       { title: 'Tomorrow Readiness', path: '/intelligence/readiness', icon: Calendar },
       { title: 'Actionable Insights', path: '/intelligence/insights', icon: TrendingUp },
+    ],
+  },
+  {
+    title: 'Predictions',
+    path: '/predictions',
+    icon: Brain,
+    roles: [ROLES.ADMIN, ROLES.SUPERVISOR, ROLES.SUPPLIER, ROLES.WORKER],
+    badge: 'Phase 9',
+    children: [
+      { title: 'Predictive Overview', path: '/predictions', icon: Brain },
+      { title: 'Material Demand', path: '/predictions/material-demand', icon: Package },
+      { title: 'Material Shortage', path: '/predictions/material-shortage', icon: AlertTriangle },
+      { title: 'Labour Requirement', path: '/predictions/labour-requirement', icon: Users },
+      { title: 'Schedule Delay', path: '/predictions/schedule-delay', icon: Calendar },
+      { title: 'Procurement Delay', path: '/predictions/procurement-delay', icon: Truck },
+      { title: 'Cost Forecast', path: '/predictions/cost-forecast', icon: DollarSign },
+      { title: 'Readiness Forecast', path: '/predictions/readiness', icon: Sparkles },
+      { title: 'Prediction History', path: '/predictions/history', icon: History },
+      { title: 'Model Readiness', path: '/predictions/model-readiness', icon: Layers },
     ],
   },
   {
